@@ -4,47 +4,56 @@
 class OutputList
   HEADER = %w[Name Price Image].freeze
 
-  attr_reader :list_data, :products
+  attr_reader :list_data, :pages
 
-  def initialize(products)
-    @products = products
+  def initialize(pages)
+    @pages = pages
     @rows = []
   end
 
   def call
-    @list_data = prepare_list_data
+    prepare_list_data
   end
 
   private
 
   def prepare_list_data
-    products.each do |product|
+    select_products_object.each do |product|
       if product.multiple?
-        handler_multiple_page(product)
+        data_multiple_page(product)
       else
-        handler_single_page(product)
+        data_single_page(product)
       end
     end
     @rows.unshift(HEADER)
   end
-end
 
-def handler_multiple_page(product)
-  product.price_arr.each_with_index.map do |price, index|
+  def data_multiple_page(product)
+    product.price_arr.each_with_index.map do |price, index|
+      row = [
+        "#{name_as_on_the_site(product.name)} - #{product.weight_arr[index]}",
+        price.to_f,
+        product.image_link
+      ]
+      @rows.push(row)
+    end
+  end
+
+  def data_single_page(product)
     row = [
-      "#{product.name} - #{product.weight_arr[index]}",
-      price.to_f,
+      "#{name_as_on_the_site(product.name)} - #{product.weight_arr.first}",
+      product.price_arr.first.to_f,
       product.image_link
     ]
     @rows.push(row)
   end
-end
 
-def handler_single_page(product)
-  row = [
-    "#{product.name} - #{product.weight_arr.first}",
-    product.price_arr.first.to_f,
-    product.image_link
-  ]
-  @rows.push(row)
+  def select_products_object
+    pages.map(&:links_on_page).flatten
+  end
+
+  # The product name on the site is changed using the CSS property 'text-transform: capitalize;'
+  def name_as_on_the_site(name)
+    name.split(' ').map!(&:capitalize).join(' ')
+  end
 end
