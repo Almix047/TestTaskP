@@ -5,7 +5,7 @@ class PetProduct
   attr_reader :product_link, :parser, :num
 
   def initialize(product_link, num)
-    @parser = PetProductsParser.new(product_link)
+    @parser = PetsonicParser.new(product_link)
     @num = num
   end
 

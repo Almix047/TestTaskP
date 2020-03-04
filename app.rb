@@ -11,10 +11,10 @@ URL = 'https://www.petsonic.com/snacks-huesos-para-perros/'
 # initial link collector
 class Handler
   def fetch_links
-    page = PetProductsParser.new(URL).fetch_page
+    page = PetSonicParser.new(URL).fetch_page
     arr_pages_link = page.xpath("//*[contains(@id, 'pagination_bottom')]//a/@href").map(&:text).uniq
     page.xpath("//*[@class='nombre-producto-list prod-name-pack']//a/@href").map(&:text) # arr_product_links_per_page
   end
 end
 
-# page = PetProductsParser.new(INPUT_URL).fetch_page
+# page = PetSonicParser.new(INPUT_URL).fetch_page

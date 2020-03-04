@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'csv'
-require_relative 'pet_products_parser.rb'
+require_relative 'petsonic_parser.rb'
 require_relative 'app.rb'
 require_relative 'output_list.rb'
 require_relative 'pet_product.rb'
