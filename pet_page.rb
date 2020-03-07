@@ -13,10 +13,12 @@ class PetPage
   end
 
   def links_on_page
-    parser.fetch_page.xpath("//*[@class='nombre-producto-list prod-name-pack']//a/@href").map { |page_link| PetProduct.new(page_link.text) }
+    path = "//*[@class='nombre-producto-list prod-name-pack']//a/@href"
+    parser.fetch_page.xpath(path).map { |link| PetProduct.new(link.text) }
   end
 
   def neighboring_pages
-    parser.fetch_page.xpath("//*[contains(@id, 'pagination_bottom')]//a/@href").map { |page_link| SITE_URL + page_link.text }.uniq
+    path = "//*[contains(@id, 'pagination_bottom')]//a/@href"
+    parser.fetch_page.xpath(path).map { |link| SITE_URL + link.text }.uniq
   end
 end
