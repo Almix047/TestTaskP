@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
+require 'i18n'
 require_relative 'petsonic_parser.rb'
 require_relative 'pet_page.rb'
 require_relative 'record_to_file.rb'
 
+I18n.load_path << Dir[File.expand_path('locales') + '/*.yml']
+I18n.default_locale = :en
+
 if ARGV.empty?
-  puts 'Для запуска необходимо указать дополнительно в аргументах:
-        ссылку на страницу категории
-        имя файла в который будет записан результат
-        (если не указан, результат будет записан в файл rezult.csv)'
-  puts 'Пример: ruby app.rb https://SITE_URL FILENAME'
+  puts I18n.t('empty_argv.error')
+  puts I18n.t('empty_argv.example')
   exit
 end
 

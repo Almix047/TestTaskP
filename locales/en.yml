@@ -1,0 +1,7 @@
+en:
+  empty_argv:
+    error: "To start, you must specify additionally in the arguments:\n
+                link to category page\n
+                name of the file to which the result will be written\n
+                (if not specified, the result will be written to the 'result.csv' file)"
+    example: "Example: ruby app.rb https://SITE_URL FILENAME"
