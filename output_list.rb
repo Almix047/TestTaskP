@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'informer.rb'
+
 # Configuration of the output view
 class OutputList
   HEADER = %w[Name Price Image].freeze
@@ -18,7 +20,11 @@ class OutputList
   private
 
   def prepare_list_data
-    select_products_object.each do |product|
+    products = select_products_object
+    products_all_num = products.length
+    Informer.result_reading_message(products_all_num, pages.length)
+    products.each_with_index do |product, index|
+      Informer.processing_message(index, products_all_num, product.product_link)
       if product.multiple?
         data_multiple_page(product)
       else

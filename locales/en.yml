@@ -5,3 +5,13 @@ en:
                 name of the file to which the result will be written\n
                 (if not specified, the result will be written to the 'result.csv' file)"
     example: "Example: ruby app.rb https://SITE_URL FILENAME"
+  start: 'Reading a page by reference...'
+  result_reading_page:
+    found: 'items found on'
+    pages: 'pages'
+  is_processed:
+    text: 'Now processing item'
+    pretext: 'out of'
+  record: 'Writing data to a file...'
+  finish: 'Done.'
+  bye: Bye.

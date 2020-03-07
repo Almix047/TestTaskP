@@ -35,4 +35,7 @@ FILENAME = if ARGV[1] && !ARGV[1].to_s.strip.empty?
              'result.csv'
            end
 
+Informer.start_message
 RecordToFile.save_as_csv_file
+Informer.finish_message
+Informer.bye_message
