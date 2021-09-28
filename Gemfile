@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 ruby '2.6.5'
 
 gem 'curb', '~> 0.9.3'
-gem 'nokogiri', '~> 1.10', '>= 1.10.3'
+gem 'nokogiri', '~> 1.12'
 
 group :development do
   gem 'pry'
